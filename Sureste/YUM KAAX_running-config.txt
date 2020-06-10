@@ -1,0 +1,131 @@
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname YUMKAAX
+!
+!
+!
+enable secret 5 $1$mERr$RldxcCZEZsTFTETUyRaA50
+!
+!
+!
+!
+!
+aaa new-model
+!
+aaa authentication login default group tacacs+ 
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+username administrador privilege 15 secret 5 $1$mERr$RldxcCZEZsTFTETUyRaA50
+!
+!
+license udi pid CISCO2901/K9 sn FTX1524ZI68-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name juanmark.com
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ ip address 148.60.63.2 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 148.60.68.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/0/0
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/0/1
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/0/2
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/0/3
+ switchport mode access
+ switchport nonegotiate
+!
+interface GigabitEthernet0/1/0
+ no ip address
+ shutdown
+!
+interface Serial0/2/0
+ ip address 148.60.105.1 255.255.255.0
+!
+interface Serial0/2/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router rip
+ version 2
+ network 148.60.0.0
+ no auto-summary
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+no cdp run
+!
+!
+tacacs-server host 148.60.0.150 key login
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line 0/3/0 0/3/7
+!
+line vty 0 4
+ transport input ssh
+line vty 5 15
+ transport input ssh
+!
+!
+!
+end
+
